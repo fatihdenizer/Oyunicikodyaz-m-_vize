@@ -4,10 +4,11 @@
 Bu projeyi Unity oyun motoru ve C# kullanarak tek sahneli, 3D fizik tabanlı bir oyun olarak geliştirdim. Amacım WASD tuşlarıyla topu yönlendirip yeşil nesneleri toplayarak puan kazanmak (+10) ve kırmızı engellerden kaçmak (-5). 50 puana ulaştığımda bitiş alanına giderek oyunu tamamlıyorum ve sahne otomatik olarak başa dönüyor.
 
 ## 2. Scriptlerin Görevleri
-**TopHareketi.cs:** Projedeki her şeyi bu scriptle yönettim. Topun Rigidbody ile hareket etmesi, zıplaması, zemin kontrolü (`isGrounded`), nesnelere çarpma/toplama işlemleri, puan hesabı ve oyun bitince sahnenin yeniden yüklenmesi (`SceneManager`) bu kodun içinde çalışıyor. 
+* **PlayerController.cs:** Projedeki temel mekanikleri bu scriptle yönettim. Topun Rigidbody ile hareket etmesi, zıplaması, zemin kontrolü, nesnelere çarpma/toplama işlemleri, puan hesabı ve oyun bitince sahnenin yeniden yüklenmesi (`SceneManager`) bu kodun içinde çalışıyor.
+* **CameraController.cs:** Kameranın oyuncuyu (topu) oyun boyunca pürüzsüz bir şekilde takip etmesini sağlayan sistemi bu script ile kurdum. Bu kodu ve takip mantığını oluştururken yapay zekadan destek aldım.
 
 ## 3. Seçilen Mekaniğin Algoritması: Zıplama Sistemi
-Havada sınırsız zıplamayı engellemek için şöyle bir algoritma kurdum: Top "Zemin" etiketli objeye değdiğinde `OnCollisionEnter` ile `isGrounded` değişkenini `true` yaptım. Space tuşuna basıldığında, kod önce `isGrounded` true mu diye kontrol ediyor, öyleyse `AddForce` ile topu zıplatıyor. Zeminle temas kesildiğinde ise `OnCollisionExit` ile değişkeni `false` yapıp havada tekrar zıplamayı engelliyorum.
+Havada sınırsız zıplamayı engellemek için şöyle bir algoritma oluşturduö: Top "Zemin" etiketli objeye değdiğinde `OnCollisionEnter` ile `isGrounded` değişkenini `true` yaptım. Space tuşuna basıldığında, kod önce `isGrounded` true mu diye kontrol ediyor, öyleyse `AddForce` ile topu zıplatıyor. Zeminle temas kesildiğinde ise `OnCollisionExit` ile değişkeni `false` yapıp havada tekrar zıplamayı engelliyorum.
 
 ## 4. Karşılaştığım Hatalar ve Çözümleri
 Geliştirme sürecinde ve kod yazarken yaşadığım bazı sorunlarda, hatanın kaynağını bulması için yapay zekadan yardım aldım. Sorunları tespit ettikten sonra çözümleri projeme şu şekilde uyguladım:
